@@ -112,7 +112,9 @@ themes = {
     }
 }
 
-# --- State Initialization ---
+##
+
+# --- State Initialization (WITH FINAL FIX) ---
 if 'theme' not in st.session_state:
     st.session_state.theme = "Blue Sky"
 if 'last_agent_output' not in st.session_state:
@@ -127,17 +129,21 @@ if 'combined_markdown' not in st.session_state:
     st.session_state.combined_markdown = ""
 if 'raw_combined' not in st.session_state:
     st.session_state.raw_combined = ""
-if 'article2_markdown' not in st.session_state:
-    st.session_state.article2_markdown = ""
 if 'mind_map_relationships' not in st.session_state:
     st.session_state.mind_map_relationships = []
 if 'entity_categories' not in st.session_state:
     st.session_state.entity_categories = [
-        "Person", "Organization", "Location", "Technology", 
-        "Concept", "Product", "Event", "Date", "Metric", "Other"
+        "Person", "Organization", "Location", "Technology", "Concept",
+        "Product", "Event", "Date", "Metric", "Other"
     ]
 if 'current_agent_index' not in st.session_state:
     st.session_state.current_agent_index = 0
+# --- FIX: Initialize article2_input to prevent AttributeError ---
+if 'article2_input' not in st.session_state:
+    st.session_state.article2_input = ""
+# --- END OF FIX ---
+
+
 
 # Apply theme with enhanced styling
 current_theme = themes.get(st.session_state.theme, themes["Blue Sky"])
