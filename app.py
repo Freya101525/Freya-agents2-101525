@@ -573,58 +573,48 @@ if st.session_state.raw_combined:
             st.warning("⚠️ No agents found. Please create an `agents.yaml` file.")
 
 
-# --- Mind Map Section ---
+
+# --- Article 2 & Mind Map ---
 st.header("🧠 Cross-Document Mind Map Generation")
 
-# Use session state to keep the article 2 text persistent
-st.session_state.article2_input = st.text_area(
-    "Paste a second article to compare and find relationships",
-    value=st.session_state.article2_input,
-    height=200
-)
+article2_input = st.text_area("Paste a second article to compare and find relationships", height=200)
 
-if st.button("Generate Relationships") and st.session_state.article2_input and st.session_state.raw_combined:
-    # ... (Relationship generation logic remains the same)
-    pass
+if st.button("Generate Relationships") and article2_input and st.session_state.raw_combined:
+    with st.spinner("Finding relationships between documents..."):
+        prompt = f"""Analyze these two documents to find conceptual relationships between them for a mind map.
+        Identify key entities or concepts from each document that are related.
+        Return the relationships as Python-style tuples: (Source Entity, Target Entity, Relationship Description), with one tuple per line.
+        
+        Document 1 (first 4000 chars): {st.session_state.raw_combined[:4000]}
+        Document 2 (first 4000 chars): {article2_input[:4000]}
+        
+        Example:
+        ("AI in Healthcare", "Diagnostic Accuracy", "Improves")
+        ("Machine Learning", "Data Privacy", "Raises concerns about")
+        """
+        result = call_llm_api("Gemini", st.session_state.api_keys.get("Gemini"), "gemini-2.5-flash", prompt)
+        
+        if result:
+            relationships = []
+            pattern = re.compile(r'\("([^"]+)",\s*"([^"]+)",\s*"([^"]+)"\)')
+            matches = pattern.findall(result)
+            for match in matches:
+                relationships.append(match)
+            
+            st.session_state.mind_map_relationships = relationships
+            if not relationships:
+                st.warning("No relationships in the expected format were found. The model may have returned a different structure.")
+                st.text_area("LLM Raw Output for Debugging", result)
 
 if st.session_state.mind_map_relationships:
     st.subheader("Interactive Mind Map")
     html_content = create_interactive_mindmap(st.session_state.mind_map_relationships)
     if html_content:
         st.components.v1.html(html_content, height=650)
-    
-    # --- NEW: EDITABLE RELATIONSHIPS ---
-    st.subheader("Edit Relationships")
-    # Format relationships for display in the text area
-    rels_as_str = "\n".join([str(rel) for rel in st.session_state.mind_map_relationships])
-    
-    edited_rels_str = st.text_area(
-        "Edit the relationships below (one Python tuple per line) and click 'Update Mind Map'.",
-        value=rels_as_str,
-        height=250
-    )
-    
-    if st.button("Update Mind Map", use_container_width=True):
-        new_rels = []
-        try:
-            # Parse the string back into a list of tuples
-            for line in edited_rels_str.strip().split('\n'):
-                if line.strip():
-                    # ast.literal_eval is a safe way to parse Python literals
-                    parsed_tuple = ast.literal_eval(line.strip())
-                    if isinstance(parsed_tuple, tuple) and len(parsed_tuple) == 3:
-                        new_rels.append(parsed_tuple)
-                    else:
-                        st.warning(f"Skipping malformed line: {line}")
-            
-            st.session_state.mind_map_relationships = new_rels
-            st.success("Mind map updated successfully!")
-            # Rerun to display the updated map immediately
-            st.rerun()
-            
-        except Exception as e:
-            st.error(f"Error parsing relationships: {e}. Please ensure each line is a valid Python tuple, e.g., ('Source', 'Target', 'Relation').")
+        st.markdown(create_download_link(html_content, "mindmap.html", "text/html"), unsafe_allow_html=True)
 
+st.markdown("---")
+st.info("💡 Application updated with the official xAI SDK implementation. Ready for deployment.")
 # --- NEW: KEYWORD-DRIVEN COMPARISON SECTION ---
 st.header("🔍 Keyword-Driven Comparison")
 
