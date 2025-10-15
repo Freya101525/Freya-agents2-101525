@@ -726,7 +726,7 @@ if st.session_state.raw_combined and st.session_state.article2_input:
                 report = call_llm_api(
                     "Gemini",
                     st.session_state.api_keys.get("Gemini"),
-                    "gemini-1.5-flash",
+                    "gemini-2.5-flash-lite",
                     comparison_prompt
                 )
                 if report:
