@@ -536,8 +536,7 @@ if st.session_state.raw_combined:
             with col2:
                 csv_entities = export_entities_csv(st.session_state.entities)
                 st.markdown(create_download_link(csv_entities, "entities.csv", "text/csv"), unsafe_allow_html=True)
-      # --- AGENT EXECUTION TAB (CORRECTED) ---
-    with tab5:
+      with tab5:
         st.subheader("🤖 Agentic Execution")
         agents = load_agents().get('agents', [])
         
@@ -646,6 +645,9 @@ if st.session_state.raw_combined:
                     pass
         else:
             st.warning("⚠️ No agents found. Please create an `agents.yaml` file.")
+
+# --- Mind Map and Keyword Comparison Sections ---
+# ... (These sections are unchanged)
 
 # --- Mind Map Section ---
 st.header("🧠 Cross-Document Mind Map Generation")
