@@ -549,9 +549,9 @@ if st.session_state.raw_combined:
         agents = load_agents().get('agents', [])
         
         model_options = {
-            "Gemini": ["gemini-1.5-flash", "gemini-pro"], 
-            "OpenAI": ["gpt-4o", "gpt-3.5-turbo"], 
-            "Grok": ["grok-4", "grok-1.5-flash"]
+            "Gemini": ["gemini-2.5-flash", "gemini-2.5-flash-lite"], 
+            "OpenAI": ["gpt-4o-mini", "gpt-4.1-mini","gpt-5-nano"], 
+            "Grok": ["grok-4-fast-reasoning", "grok-3-mini"]
         }
         
         if agents:
