@@ -1,0 +1,155 @@
+agents:
+  - name: "Initial Data Cleaner"
+    category: "Data Cleaning"
+    description: "Performs initial cleaning of raw text data, removing artifacts, extra whitespace, and formatting issues."
+    prompt: "Please clean the following text data. Remove any irrelevant formatting, excessive whitespace, and any non-textual artifacts. The output should be a clean block of text ready for analysis. Here is the data:\n"
+
+  - name: "PII Redaction Agent"
+    category: "Data Cleaning"
+    description: "Identifies and redacts Personally Identifiable Information (PII) like names, emails, and phone numbers."
+    prompt: "Analyze the following text and redact any Personally Identifiable Information (PII) such as names, email addresses, phone numbers, and physical addresses. Replace them with placeholders like [REDACTED_NAME]. Here is the text:\n"
+
+  - name: "Text Summarizer"
+    category: "Summarization"
+    description: "Generates a concise summary of the input text, highlighting the main points."
+    prompt: "Provide a concise, executive-level summary of the following text. Focus on the key findings and main arguments. The summary should be in markdown format. Here is the text:\n"
+
+  - name: "Key Theme Extractor"
+    category: "Text Analysis"
+    description: "Identifies the main themes and topics present in the text."
+    prompt: "Identify and list the top 5-7 main themes or topics discussed in the following text. For each theme, provide a brief one-sentence description. Format the output as a markdown list. Here is the text:\n"
+
+  - name: "Sentiment Analysis Agent"
+    category: "Sentiment Analysis"
+    description: "Analyzes the overall sentiment of the text (Positive, Negative, Neutral) and provides a confidence score."
+    prompt: "Perform sentiment analysis on the following text. Determine if the overall sentiment is Positive, Negative, or Neutral. Provide a brief justification for your conclusion and a confidence score from 0 to 1. Format as JSON. Here is the text:\n"
+
+  - name: "Keyword & Phrase Extractor"
+    category: "Text Analysis"
+    description: "Extracts the most relevant keywords and key phrases from the text."
+    prompt: "Extract the top 20 most relevant keywords and key phrases from the following text. List them in order of importance. Here is the text:\n"
+
+  - name: "Data Structure Identifier"
+    category: "Data Mining"
+    description: "Identifies any structured data (like tables or lists) within the text and suggests a schema."
+    prompt: "Analyze the provided text to identify any structured or semi-structured data. If you find data that could be represented in a table, suggest a suitable CSV or JSON schema for it. Here is the text:\n"
+    
+  - name: "Tabular Data Extractor"
+    category: "Data Mining"
+    description: "Extracts data from unstructured text and converts it into a markdown table."
+    prompt: "From the following text, extract the relevant data points and organize them into a markdown table. Use the schema suggested by the 'Data Structure Identifier' or create a logical one if none was provided. Here is the text:\n"
+    
+  - name: "Quantitative Data Extractor"
+    category: "Data Mining"
+    description: "Identifies and extracts all quantitative metrics, numbers, and statistics from the text."
+    prompt: "Scan the following text and extract all quantitative data points, such as percentages, monetary values, counts, and other metrics. List them clearly. Here is the text:\n"
+    
+  - name: "Anomaly Detection Agent"
+    category: "Insight Generation"
+    description: "Identifies potential anomalies, outliers, or surprising information within the text."
+    prompt: "Read the following text and identify any information that seems anomalous, surprising, or contradictory. Highlight these potential outliers and provide a brief explanation for why they stand out. Here is the text:\n"
+
+  - name: "Causal Relationship Identifier"
+    category: "Insight Generation"
+    description: "Identifies potential cause-and-effect relationships mentioned in the text."
+    prompt: "Analyze the following text to identify any stated or implied causal relationships (e.g., 'A led to B', 'because of X, Y occurred'). List these relationships clearly. Here is the text:\n"
+
+  - name: "SWOT Analysis Agent"
+    category: "Business Analysis"
+    description: "Performs a SWOT (Strengths, Weaknesses, Opportunities, Threats) analysis based on the text."
+    prompt: "Based on the provided text, conduct a SWOT analysis (Strengths, Weaknesses, Opportunities, Threats). Present the results in four distinct markdown lists. Here is the text:\n"
+    
+  - name: "Actionable Insights Agent"
+    category: "Insight Generation"
+    description: "Generates a list of actionable insights or recommendations based on the input data."
+    prompt: "From the following analysis, generate a list of 3-5 actionable insights or recommendations. Each insight should be clear, concise, and directly supported by the data. Here is the analysis:\n"
+    
+  - name: "Visualization Recommender"
+    category: "Visualization"
+    description: "Suggests the best types of charts or graphs to visualize the data or insights."
+    prompt: "Based on the following data and analysis, recommend the 3 most effective types of visualizations (e.g., bar chart, line graph, pie chart, scatter plot) to represent the key findings. Justify each recommendation. Here is the data:\n"
+
+  - name: "Chart Data Formatter (JSON)"
+    category: "Visualization"
+    description: "Formats the extracted data into a JSON structure suitable for charting libraries like Chart.js or D3.js."
+    prompt: "Take the following tabular or quantitative data and format it into a JSON object suitable for creating a chart. Use a simple structure with labels and datasets. Here is the data:\n"
+
+  - name: "Python Plotting Code Generator (Matplotlib)"
+    category: "Visualization"
+    description: "Generates Python code using Matplotlib to create a suitable plot for the data."
+    prompt: "Write a Python script using the Matplotlib library to generate a suitable visualization for the following data. Include comments in the code to explain the steps. Here is the data:\n"
+
+  - name: "Python Plotting Code Generator (Seaborn)"
+    category: "Visualization"
+    description: "Generates Python code using Seaborn for more advanced statistical plots."
+    prompt: "Write a Python script using the Seaborn library to generate a statistically informative visualization for the following data. Assume the data is in a pandas DataFrame. Here is the data:\n"
+
+  - name: "Mermaid.js Syntax Generator"
+    category: "Visualization"
+    description: "Creates a diagram (flowchart, pie chart) using Mermaid.js syntax to visualize a process or relationship."
+    prompt: "Based on the following information, create a diagram using Mermaid.js syntax to visualize the process, hierarchy, or relationship described. Provide only the Mermaid code block. Here is the information:\n"
+    
+  - name: "Hypothesis Generation Agent"
+    category: "Strategic Analysis"
+    description: "Generates testable hypotheses based on the patterns and insights found in the data."
+    prompt: "Based on the analysis provided, formulate 3-5 testable hypotheses. Each hypothesis should be a clear statement that can be investigated with further data. Here is the analysis:\n"
+
+  - name: "Future Trend Predictor"
+    category: "Strategic Analysis"
+    description: "Predicts future trends or outcomes based on the information in the text."
+    prompt: "Analyze the provided text to identify key trends. Based on these trends, predict 3-5 potential future developments or outcomes. Provide a brief rationale for each prediction. Here is the text:\n"
+
+  - name: "Competitor Analysis Agent"
+    category: "Business Analysis"
+    description: "Identifies competitors mentioned in the text and summarizes their key attributes."
+    prompt: "Scan the following text for any mention of competitors. For each competitor found, create a brief summary of their described strengths, weaknesses, or market position. Here is the text:\n"
+    
+  - name: "Market Gap Identifier"
+    category: "Business Analysis"
+    description: "Identifies potential market gaps or unmet needs discussed in the text."
+    prompt: "Analyze the following text to identify any discussion of market gaps, customer pain points, or unmet needs. Summarize these opportunities. Here is the text:\n"
+    
+  - name: "Technical Jargon Explainer"
+    category: "Text Analysis"
+    description: "Identifies and explains technical jargon or complex concepts in simple terms."
+    prompt: "Identify any technical terms, acronyms, or complex jargon in the following text. Provide a simple, easy-to-understand explanation for each. Here is the text:\n"
+
+  - name: "Report Section Drafter"
+    category: "Reporting"
+    description: "Drafts a specific section of a report (e.g., Introduction, Findings, Conclusion) based on the input."
+    prompt: "Using the information provided, draft a 'Key Findings' section for a formal report. The tone should be professional and objective. Use markdown for structure. Here is the information:\n"
+
+  - name: "Q&A Generation Agent"
+    category: "Summarization"
+    description: "Generates a list of potential questions and their answers based on the text content."
+    prompt: "Generate a list of 5-10 frequently asked questions (FAQs) that could be answered by the provided text. For each question, provide a concise answer based directly on the text. Here is the text:\n"
+    
+  - name: "Fact-Checking Agent"
+    category: "Data Validation"
+    description: "Identifies claims in the text that should be fact-checked and suggests how to verify them."
+    prompt: "Read the following text and identify any factual claims or statistics that would require external verification. For each claim, suggest a method or source for fact-checking it. Here is the text:\n"
+    
+  - name: "Bias Detection Agent"
+    category: "Data Validation"
+    description: "Analyzes the text for potential bias in language, framing, or perspective."
+    prompt: "Analyze the following text for potential sources of bias, such as loaded language, unsupported generalizations, or one-sided arguments. Highlight these instances and explain why they might be considered biased. Here is the text:\n"
+
+  - name: "Topic Modeling Agent"
+    category: "Text Analysis"
+    description: "Groups sentences or paragraphs into a few high-level topics."
+    prompt: "Perform topic modeling on the provided text. Identify 3-5 main topics and list the key sentences or phrases that belong to each topic. Here is the text:\n"
+    
+  - name: "Data Transformation Agent"
+    category: "Data Mining"
+    description: "Suggests ways to transform or enrich the current dataset for better analysis."
+    prompt: "Based on the provided data, suggest 3-5 ways this data could be transformed or enriched. For example, by combining fields, creating new metrics, or joining with external data sources. Here is the data:\n"
+
+  - name: "Narrative Generation Agent"
+    category: "Reporting"
+    description: "Creates a compelling narrative or story based on the data and insights."
+    prompt: "Weave the following key findings and insights into a coherent and compelling narrative. The story should explain what the data means in a way that is easy for a non-technical audience to understand. Here are the findings:\n"
+
+  - name: "Final Report Synthesizer"
+    category: "Reporting"
+    description: "Combines all previous analysis outputs into a single, comprehensive markdown report."
+    prompt: "Synthesize all the preceding analysis (summary, themes, entities, insights, etc.) into a single, well-structured, comprehensive report in markdown format. Use clear headings for each section. Here is the collected analysis:\n"

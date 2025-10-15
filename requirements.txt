@@ -1,0 +1,13 @@
+streamlit
+pandas
+PyYAML
+wordcloud
+matplotlib
+networkx
+pyvis
+google-generativeai
+openai
+xai_sdk
+pdf2image
+pytesseract
+easyocr
