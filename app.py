@@ -590,7 +590,58 @@ if st.session_state.raw_combined:
                     st.markdown(create_download_link(all_results, "all_agent_outputs.md"), unsafe_allow_html=True)
         else:
             st.warning("⚠️ No agents found. Please create an `agents.yaml` file.")
+
+    # --- Mind Map Section ---
+st.header("🧠 Cross-Document Mind Map Generation")
+
+# Use session state to keep the article 2 text persistent
+st.session_state.article2_input = st.text_area(
+    "Paste a second article to compare and find relationships",
+    value=st.session_state.article2_input,
+    height=200
+)
+
+if st.button("Generate Relationships") and st.session_state.article2_input and st.session_state.raw_combined:
+    # ... (Relationship generation logic remains the same)
+    pass
+
+if st.session_state.mind_map_relationships:
+    st.subheader("Interactive Mind Map")
+    html_content = create_interactive_mindmap(st.session_state.mind_map_relationships)
+    if html_content:
+        st.components.v1.html(html_content, height=650)
     
+    # --- NEW: EDITABLE RELATIONSHIPS ---
+    st.subheader("Edit Relationships")
+    # Format relationships for display in the text area
+    rels_as_str = "\n".join([str(rel) for rel in st.session_state.mind_map_relationships])
+    
+    edited_rels_str = st.text_area(
+        "Edit the relationships below (one Python tuple per line) and click 'Update Mind Map'.",
+        value=rels_as_str,
+        height=250
+    )
+    
+    if st.button("Update Mind Map", use_container_width=True):
+        new_rels = []
+        try:
+            # Parse the string back into a list of tuples
+            for line in edited_rels_str.strip().split('\n'):
+                if line.strip():
+                    # ast.literal_eval is a safe way to parse Python literals
+                    parsed_tuple = ast.literal_eval(line.strip())
+                    if isinstance(parsed_tuple, tuple) and len(parsed_tuple) == 3:
+                        new_rels.append(parsed_tuple)
+                    else:
+                        st.warning(f"Skipping malformed line: {line}")
+            
+            st.session_state.mind_map_relationships = new_rels
+            st.success("Mind map updated successfully!")
+            # Rerun to display the updated map immediately
+            st.rerun()
+            
+        except Exception as e:
+            st.error(f"Error parsing relationships: {e}. Please ensure each line is a valid Python tuple, e.g., ('Source', 'Target', 'Relation').")
     # --- NEW: EDITABLE RELATIONSHIPS ---
     st.subheader("Edit Relationships")
     # Format relationships for display in the text area
