@@ -153,3 +153,13 @@ agents:
     category: "Reporting"
     description: "Combines all previous analysis outputs into a single, comprehensive markdown report."
     prompt: "Synthesize all the preceding analysis (summary, themes, entities, insights, etc.) into a single, well-structured, comprehensive report in markdown format. Use clear headings for each section. Here is the collected analysis:\n"
+
+  - name: "QMS reporter"
+    category: "Data Cleaning"
+    description: "QMS reporter"
+    prompt: "Please keep the all contents and structure of the following text data. Please only replace related document information (for example 矯正和預防措施管制程序(PGI-QP-020，版次A)」) from the previous text by user provided listB and present results in markdown with replaced information in coral color. Here is the data:\n"
+
+  - name: "QMS reporter organizer"
+    category: "Data Cleaning"
+    description: "QMS reporter organizer"
+    prompt: "Please keep the all contents and structure of the following text data. Please reorganzed the previous text in markdown following user provided instructions with keywords in coral color. Here is the data:\n"
